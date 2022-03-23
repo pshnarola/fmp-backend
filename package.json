@@ -1,0 +1,30 @@
+{
+  "name": "fmp-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://pshnarola:e40b0ea55d53e567713c26c69bb5668eadf8be3a@github.com/pshnarola/fmp-backend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pshnarola/fmp-backend/issues"
+  },
+  "homepage": "https://github.com/pshnarola/fmp-backend#readme",
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "mongoose": "^6.2.8",
+    "mongoose-slug-updater": "^3.3.0",
+    "validator": "^13.7.0"
+  },
+  "devDependencies": {
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.15"
+  }
+}

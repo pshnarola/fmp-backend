@@ -1,10 +1,12 @@
-const Service = require('../models/serviceModel');
-const ServiceTier = require('../models/serviceTierModel');
+const ServiceTier = require('../models/ServiceTier');
 const catchAsync = require('../utils/catchAsync');
 
 exports.all = catchAsync(async (req, res, next) => {
   const serviceTiers = await ServiceTier.find({
     serviceId: req.body.serviceId,
+  }).populate({
+    path: 'serviceId',
+    select: '-__v',
   });
 
   res.status(200).json({

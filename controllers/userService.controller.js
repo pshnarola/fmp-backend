@@ -1,10 +1,11 @@
-const UserService = require('../models/userServiceModel');
-const AppError = require('../utils/appError');
+const createError = require('http-errors');
+
+const UserService = require('../models/UserService');
 const catchAsync = require('../utils/catchAsync');
 
 exports.create = catchAsync(async (req, res, next) => {
   if (!(req.body.serviceId && req.body.serviceTierId)) {
-    return next(new AppError('serviceId & serviceTierId is required!'));
+    return next(new createError(400, 'serviceId & serviceTierId is required!'));
   }
 
   const userService = await UserService.create({

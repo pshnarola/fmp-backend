@@ -1,10 +1,10 @@
-const Service = require('../models/serviceModel');
+const Service = require('../models/Service');
 const catchAsync = require('../utils/catchAsync');
 
 exports.all = catchAsync(async (req, res, next) => {
   const services = await Service.find();
 
-  res.status(200).json({
+  return res.status(200).json({
     status: 'success',
     data: {
       services,

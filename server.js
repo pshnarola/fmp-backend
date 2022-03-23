@@ -1,13 +1,11 @@
-const mongoose = require('mongoose');
-const dotenv = require('dotenv');
+const env = require('./config/index');
 const app = require('./app');
 
-dotenv.config({ path: './.env' });
+require('dotenv').config();
+require('mongoose').connect(env.DATABASE_STRING);
 
-mongoose.connect(process.env.DATABASE_STRING, () => {
-  console.log('Database connected');
-});
+const PORT = process.env.PORT || 8080;
 
-app.listen(process.env.PORT, () => {
-  console.log(`Server is listening to PORT: ${process.env.PORT}`);
+app.listen(PORT, () => {
+  console.log(`Server is listening to PORT: ${PORT}`);
 });

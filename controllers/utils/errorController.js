@@ -1,26 +1,28 @@
-const AppError = require('../../utils/appError');
+const createError = require('http-errors');
 
 const handleCastErrorDB = err => {
   const message = `Invalid ${err.path}: ${err.value}.`;
-  return new AppError(message, 400);
+  return new createError(400, message);
 };
 
 const handleDuplicateFieldsDB = err => {
   const value = err.errmsg.match(/(["'])(\\?.)*?\1/)[0];
   const message = `Duplicate field value: ${value}. Please use another value!`;
-  return new AppError(message, 400);
+  return new createError(400, message);
 };
 
 const handleValidationErrorDB = err => {
   const errors = Object.values(err.errors).map(el => el.message);
 
   const message = `${errors[errors.length - 1]}`;
-  return new AppError(message, 400);
+  return new createError(400, message);
 };
 
 const sendError = (err, res) => {
-  res.status(err.statusCode).json({
+  return res.status(err.statusCode).json({
     status: err.status,
+    name: err.name,
+    code: err.code,
     message: err.message,
   });
 };

@@ -1,12 +1,16 @@
 const express = require('express');
+
 const serviceController = require('../controllers/service.controller');
 
 const router = express.Router();
 
-router.route('/').get(serviceController.all);
+router.use('/:slug/service-tiers', require('../routes/serviceTier.routes'));
 
-// .post(serviceController.create)
-// .patch(serviceController.update)
-// .delete(serviceController.delete);
+router
+  .route('/')
+  .get(serviceController.getAll)
+  .post(serviceController.create)
+  .patch(serviceController.update)
+  .delete(serviceController.delete);
 
 module.exports = router;

@@ -29,7 +29,7 @@ exports.create = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.all = catchAsync(async (req, res, next) => {
+exports.getAll = catchAsync(async (req, res, next) => {
   const userServices = await UserService.find()
     .populate({
       path: 'serviceId',

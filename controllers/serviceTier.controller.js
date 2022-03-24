@@ -1,9 +1,13 @@
+const Service = require('../models/Service');
 const ServiceTier = require('../models/ServiceTier');
 const catchAsync = require('../utils/catchAsync');
 
-exports.all = catchAsync(async (req, res, next) => {
+exports.getTiersByServiceId = catchAsync(async (req, res, next) => {
+  const service = await Service.findOne({
+    slug: req.params.slug,
+  });
   const serviceTiers = await ServiceTier.find({
-    serviceId: req.body.serviceId,
+    serviceId: service._id,
   }).populate({
     path: 'serviceId',
     select: '-__v',
@@ -18,11 +22,14 @@ exports.all = catchAsync(async (req, res, next) => {
 });
 
 exports.create = catchAsync(async (req, res, next) => {
+  const service = await Service.findOne({
+    slug: req.params.slug,
+  });
   const serviceTier = await ServiceTier.create({
     name: req.body.name,
     description: req.body.description,
     price: req.body.price,
-    serviceId: req.body.serviceId,
+    serviceId: service._id,
   });
 
   res.status(201).json({
@@ -34,8 +41,11 @@ exports.create = catchAsync(async (req, res, next) => {
 });
 
 exports.update = catchAsync(async (req, res, next) => {
-  const serviceTier = await ServiceTier.findByIdAndUpdate(
-    req.body.serviceTierId,
+  const service = await Service.findOne({
+    slug: req.params.slug,
+  });
+  const serviceTier = await ServiceTier.findOneAndUpdate(
+    service._id,
     {
       name: req.body.name,
       description: req.body.description,
@@ -56,7 +66,10 @@ exports.update = catchAsync(async (req, res, next) => {
 });
 
 exports.delete = catchAsync(async (req, res, next) => {
-  await ServiceTier.findByIdAndDelete(req.body.serviceTierId);
+  const service = await Service.findOne({
+    slug: req.params.slug,
+  });
+  await ServiceTier.findOneAndDelete(service._id);
 
   res.status(204).json({
     status: 'success',

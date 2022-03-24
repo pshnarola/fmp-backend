@@ -3,7 +3,7 @@ const morgan = require('morgan');
 const cors = require('cors');
 const createError = require('http-errors');
 
-const globalErrorHandler = require('./controllers/utils/errorController');
+const globalErrorHandler = require('./controllers/utils/error.controller');
 
 const app = express();
 

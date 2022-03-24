@@ -7,10 +7,6 @@
     "development": "NODE_ENV=development nodemon server.js",
     "production": "NODE_ENV=production node server.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://pshnarola:e40b0ea55d53e567713c26c69bb5668eadf8be3a@github.com/pshnarola/fmp-backend.git"
-  },
   "author": "",
   "license": "ISC",
   "bugs": {
